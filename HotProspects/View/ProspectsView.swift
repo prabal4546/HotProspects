@@ -11,6 +11,7 @@ struct ProspectsView: View {
     enum FilterType{
         case contacted, uncontacted, none
     }
+    @EnvironmentObject var prospects: Prospects
     let filter:FilterType
     var title: String {
         switch filter {
@@ -24,8 +25,16 @@ struct ProspectsView: View {
     }
     var body: some View {
         NavigationView {
-            Text("Hello, World!")
+            Text("People:\(prospects.people.count)")
                 .navigationBarTitle(title)
+                .navigationBarItems(trailing: Button( action:{
+                    let prospect = Prospect()
+                    prospect.name = "Prabal"
+                    prospect.emailAddress = ""
+                    self.prospects.people.append(prospect)
+                }){
+                    Image(systemName: "Scan")
+                })
         }
     }
 }
