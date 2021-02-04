@@ -6,25 +6,40 @@
 //
 
 import SwiftUI
-
+import UserNotifications
 struct ContentView: View {
     @State private var selectedTab = 0
     var body: some View {
-        TabView(selection: $selectedTab) {
-            Text("Tab 1")
-                .onTapGesture {
-                    self.selectedTab = 1
-                }
-                .tabItem {
-                    Image(systemName: "star")
-                    Text("One")
-                }.tag(0)
+        Text("Hello, World!")
+        VStack {
+            Button("Request Permission") {
+                // first
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {success,error in
+                    if success {
+                          print("All set!")
+                      } else if let error = error {
+                          print(error.localizedDescription)
+                      }
 
-            Text("Tab 2")
-                .tabItem {
-                    Image(systemName: "star.fill")
-                    Text("Two")
-                }.tag(1)
+                })
+            }
+
+            Button("Schedule Notification") {
+                // second
+                let content = UNMutableNotificationContent()
+                content.title = "Feed the cat"
+                content.subtitle = "It looks hungry"
+                content.sound = UNNotificationSound.default
+
+                // show this notification five seconds from now
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+                // choose a random identifier
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                // add our notification request
+                UNUserNotificationCenter.current().add(request)
+            }
         }
     }
 }
