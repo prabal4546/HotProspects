@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		91269BF125CC4FD4002F7882 /* ProspectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91269BF025CC4FD4002F7882 /* ProspectsView.swift */; };
 		91269BF425CC4FEF002F7882 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91269BF325CC4FEF002F7882 /* MeView.swift */; };
 		912B7B1C25CC5D220055C255 /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B7B1B25CC5D220055C255 /* Prospect.swift */; };
+		912B7B2125CD17660055C255 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 912B7B2025CD17660055C255 /* CodeScanner */; };
 		91B5B86725C9903E006DEDD0 /* HotProspectsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B5B86625C9903E006DEDD0 /* HotProspectsApp.swift */; };
 		91B5B86925C9903E006DEDD0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B5B86825C9903E006DEDD0 /* ContentView.swift */; };
 		91B5B86B25C99044006DEDD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91B5B86A25C99044006DEDD0 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				912B7B2125CD17660055C255 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +113,7 @@
 			);
 			name = HotProspects;
 			packageProductDependencies = (
+				912B7B2025CD17660055C255 /* CodeScanner */,
 			);
 			productName = HotProspects;
 			productReference = 91B5B86325C9903E006DEDD0 /* HotProspects.app */;
@@ -140,6 +143,7 @@
 			);
 			mainGroup = 91B5B85A25C9903E006DEDD0;
 			packageReferences = (
+				912B7B1F25CD17660055C255 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 91B5B86425C9903E006DEDD0 /* Products */;
 			projectDirPath = "";
@@ -360,6 +364,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		912B7B1F25CD17660055C255 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		912B7B2025CD17660055C255 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 912B7B1F25CD17660055C255 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 91B5B85B25C9903E006DEDD0 /* Project object */;
 }
