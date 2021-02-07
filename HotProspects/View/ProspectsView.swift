@@ -42,38 +42,40 @@ struct ProspectsView: View {
 
     var body: some View {
         NavigationView {
-            List{
-                ForEach(filteredProspects){prospect in
-                    VStack(alignment:.leading){
-                        Text(prospect.name)
-                            .font(.headline)
-                        Text(prospect.emailAddress)
-                            .foregroundColor(.secondary)
-                    }
-                    .contextMenu{
-                        Button(prospect.isContacted ? "Mark Contacted": "Mark Uncontacted"){
-                            self.prospects.toggle(prospect)
-                        }
-                    }
-                    if !prospect.isContacted {
-                        Button("Remind Me") {
-                            self.addNotification(for: prospect)
-                        }
+                   List {
+                       ForEach(filteredProspects) { prospect in
+                           VStack(alignment: .leading) {
+                               Text(prospect.name)
+                                   .font(.headline)
+                               Text(prospect.emailAddress)
+                                   .foregroundColor(.secondary)
+                           }
+                           .contextMenu {
+                               Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted" ) {
+                                   self.prospects.toggle(prospect)
+                               }
 
-                }
-            }
-                .navigationBarTitle(title)
-                .navigationBarItems(trailing:Button(action:{
-                    self.isShowingScanner = true
-                }){
-                    Image(systemName: "qrcode.viewfinder")
-                    Text("Scan")
-                })
-            .sheet(isPresented: $isShowingScanner){
-                CodeScannerView(codeTypes:[.qr],simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
-            }
-        }
-    }
+                               if !prospect.isContacted {
+                                   Button("Remind Me") {
+                                       self.addNotification(for: prospect)
+                                   }
+                               }
+                           }
+                       }
+                   }
+                   .navigationBarTitle(title)
+                   .navigationBarItems(trailing: Button(action: {
+                       self.isShowingScanner = true
+                   }) {
+                       Image(systemName: "qrcode.viewfinder")
+                       Text("Scan")
+                   })
+                   .sheet(isPresented: $isShowingScanner) {
+                       CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
+                   }
+               }
+           }
+
     func handleScan(result: Result<String,CodeScannerView.ScanError>){
         self.isShowingScanner = false
         switch result {
@@ -128,3 +130,4 @@ struct ProspectView_Previews: PreviewProvider {
         ProspectsView(filter: .none)
     }
 }
+
