@@ -55,6 +55,11 @@ struct ProspectsView: View {
                             self.prospects.toggle(prospect)
                         }
                     }
+                    if !prospect.isContacted {
+                        Button("Remind Me") {
+                            self.addNotification(for: prospect)
+                        }
+
                 }
             }
                 .navigationBarTitle(title)
@@ -101,6 +106,20 @@ struct ProspectsView: View {
         }
 
         // more code to come
+        center.getNotificationSettings{settings in
+            if settings.authorizationStatus == .authorized{
+                addRequest()
+            }else{
+                center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {success, error in
+                    if success{
+                        addRequest()
+                    }else{
+                        print("oh oh..")
+                    }
+                })
+            }
+        }
+        
     }
 }
 
