@@ -17,6 +17,7 @@ struct ProspectsView: View {
     @EnvironmentObject var prospects: Prospects
     
     @State private var isShowingScanner = false
+    @State private var ShowingActionSheet = false
     
     let filter:FilterType
     var title: String {
@@ -82,6 +83,23 @@ struct ProspectsView: View {
                    .sheet(isPresented: $isShowingScanner) {
                        CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
                    }
+                   .navigationBarItems(leading: Button(action:{
+                    //more code to come
+                    self.ShowingActionSheet = true
+                   }){
+                    Image(systemName:"")
+                    Text("Sort")
+                   })
+                   .actionSheet(isPresented: $ShowingActionSheet) {
+                       ActionSheet(title: Text("Sort"), message: Text("Sort by"), buttons: [
+                           .default(Text("Name")),
+                           .default(Text("Most Recent")),
+                           .cancel()
+                       ])
+                   }
+            
+            
+               //
                }
            }
 

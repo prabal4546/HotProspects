@@ -7,11 +7,12 @@
 
 import SwiftUI
 class Prospect: Identifiable, Codable {
+    
     let id = UUID()
     var name = "Anonymous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
-    
+
 
 }
 class Prospects: ObservableObject {
