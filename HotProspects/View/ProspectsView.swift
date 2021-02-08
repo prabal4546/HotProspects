@@ -45,10 +45,19 @@ struct ProspectsView: View {
                    List {
                        ForEach(filteredProspects) { prospect in
                            VStack(alignment: .leading) {
-                               Text(prospect.name)
-                                   .font(.headline)
+                            HStack{
+                                Text(prospect.name)
+                                .font(.headline)
+                                if prospect.isContacted{
+                                    Image(systemName: "checkmark.circle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
                                Text(prospect.emailAddress)
                                    .foregroundColor(.secondary)
+        
                            }
                            .contextMenu {
                                Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted" ) {
