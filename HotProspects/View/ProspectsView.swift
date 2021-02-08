@@ -55,6 +55,12 @@ struct ProspectsView: View {
                                         .scaledToFit()
                                         .frame(width: 20, height: 20)
                                 }
+                                else{
+                                    Image(systemName: "questionmark.diamond")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                }
                             }
                                Text(prospect.emailAddress)
                                    .foregroundColor(.secondary)
@@ -74,22 +80,20 @@ struct ProspectsView: View {
                        }
                    }
                    .navigationBarTitle(title)
-                   .navigationBarItems(trailing: Button(action: {
-                       self.isShowingScanner = true
-                   }) {
-                       Image(systemName: "qrcode.viewfinder")
-                       Text("Scan")
-                   })
-                   .sheet(isPresented: $isShowingScanner) {
-                       CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
-                   }
-                   .navigationBarItems(leading: Button(action:{
+                   .navigationBarItems(
+                    leading: Button(action:{
                     //more code to come
                     self.ShowingActionSheet = true
                    }){
-                    Image(systemName:"")
+                    Image(systemName:"list.and.film")
                     Text("Sort")
-                   })
+                   },
+                    trailing:Button(action: {
+                    self.isShowingScanner = true
+                }){
+                    Image(systemName: "qrcode.viewfinder")
+                    Text("Scan")
+                } )
                    .actionSheet(isPresented: $ShowingActionSheet) {
                        ActionSheet(title: Text("Sort"), message: Text("Sort by"), buttons: [
                            .default(Text("Name")),
@@ -97,6 +101,16 @@ struct ProspectsView: View {
                            .cancel()
                        ])
                    }
+//                   .navigationBarItems(trailing: Button(action: {
+//                       self.isShowingScanner = true
+//                   }) {
+//                       Image(systemName: "qrcode.viewfinder")
+//                       Text("Scan")
+//                   })
+                   .sheet(isPresented: $isShowingScanner) {
+                       CodeScannerView(codeTypes: [.qr], simulatedData: "Nick Caldwell\ncald@gmail.com", completion: self.handleScan)
+                   }
+                   
             
             
                //

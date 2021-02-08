@@ -12,6 +12,9 @@ class Prospect: Identifiable, Codable {
     var name = "Anonymous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
+    static func < (lhs:Prospect, rhs:Prospect)->Bool{
+        lhs.name < rhs.name
+    }
 
 
 }
@@ -43,6 +46,10 @@ class Prospects: ObservableObject {
     func toggle(_ prospect:Prospect){
         objectWillChange.send()
         prospect.isContacted.toggle()
+        save()
+    }
+    func delete(_ indexSet: IndexSet){
+        self.people.remove(atOffsets: indexSet)
         save()
     }
 }
